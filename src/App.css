@@ -1,0 +1,86 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgb(36, 15, 31);
+  line-height: 2.0;
+}
+
+.one {
+
+}
+
+.two {
+  color: #39b7e2;
+}
+
+.three {
+  color: #fd556f;
+}
+
+.font {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 32pt;
+  font-weight: 900;
+  color: #edc919;
+}
+
+.App {
+  text-align: center;
+  margin-top: 170px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.value {
+  -webkit-appearance: none;
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 0 5px 0 10px;
+  border: none;
+  font-size: 18px;
+}
+
+.form-control {
+  display: inline-block !important;
+}
+
+select {
+  width: auto !important;
+}
+
+.wrapper {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+button {
+  background-color: #089dbf !important;
+}
+
+.chart {
+  font-size: 12pt !important;
+  font-weight: 400;
+}

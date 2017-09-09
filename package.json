@@ -1,0 +1,28 @@
+{
+  "name": "bitcoin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "history": "^4.7.2",
+    "moment": "^2.18.1",
+    "query-string": "^5.0.0",
+    "react": "^15.6.1",
+    "react-datepicker": "^0.48.0",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
+    "recharts": "^1.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-react": "^7.1.0",
+    "react-scripts": "1.0.7",
+    "styled-components": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
