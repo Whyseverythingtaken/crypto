@@ -36,7 +36,7 @@ class Result extends React.Component {
         {' would be worth '}
         <span className="highlight">${currentValue}</span>
         {' today. That\'s an ROI of '}
-        <span className="highlight">{this.calculateROI(query.investment, query.rate)}%</span>
+        <span className="highlight">{this.calculateROI(query.investment, currentValue)}%</span>
         {'.'}
         <Chart buyDate={query.date} coinsHeld={query.coins} />
       </div>
