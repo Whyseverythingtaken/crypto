@@ -1,36 +1,55 @@
 /* eslint no-underscore-dangle: ["error", { "allowAfterThis": true }]*/
 /* eslint-disable react/jsx-filename-extension */
 
-
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import { Link } from 'react-router-dom';
-import history from '../history';
+import { Redirect } from 'react-router-dom';
 import Select from '../Select';
 import '../App.css';
 import data from '../bitcoin.json';
-import formatDate from '../utilities';
+import { formatDate, days, months, years } from '../utilities';
+import { getTodaysRate } from '../utilities/api';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialInvestment: '',
+      investment: '',
       day: 10,
       month: 'Jan',
       year: 2011,
-      query: '/result?test=4'
+      todaysRate: 0,
+      fireRedirect: false
     };
 
-    this._selectedInvestment = this._selectedInvestment.bind(this);
+    this._setInvestment = this._setInvestment.bind(this);
     // this._setDate = this._setDate.bind(this);
     // this._updateBitcoinCost = this._updateBitcoinCost.bind(this);
-    this._selectedDate = this._selectedDate.bind(this);
-    this._onSubmit = this._onSubmit.bind(this);
+    this._setDate = this._setDate.bind(this);
+    this._generateQuery = this._generateQuery.bind(this);
+
+    this._formSubmit = this._formSubmit.bind(this);
   }
 
-  _selectedDate(e) {
+  // Get current Bitcoin rate and store it in state
+  componentDidMount() {
+    getTodaysRate()
+    .then((response) => {
+      this.setState({ todaysRate: response.USD.rate_float });
+    });
+  }
+
+  // Do not re-render if todaysRate has been updated.
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.todaysRate !== this.state.todaysRate) {
+      return false;
+    }
+    return true;
+  }
+
+  // Store date in state
+  _setDate(e) {
     console.log(e.target.name);
     const period = e.target.name;
     const value = e.target.value;
@@ -39,21 +58,28 @@ class App extends Component {
     });
   }
 
-  _selectedInvestment(e) {
-    this.setState({ initialInvestment: e.target.value });
+  _setInvestment(e) {
+    this.setState({ investment: e.target.value });
   }
 
-  _onSubmit() {
-    const { day, month, year, initialInvestment } = this.state;
+  _generateQuery() {
+    const { day, month, year, investment, todaysRate } = this.state;
     const date = formatDate(day, month, year);
-    const btcCost = data[date];
+    const coins = investment / data[date];
     const prefs = {};
     prefs.date = date;
-    prefs.cost = btcCost;
-    prefs.investment = initialInvestment;
-    const stringified = queryString.stringify(prefs);
-    console.log(stringified, btcCost, date);
-    // history.push(`/result`);
+    prefs.coins = coins;
+    prefs.investment = investment;
+
+    // Get last item in the object and set the rate.
+    const lastDate = Object.keys(data).pop();
+    prefs.rate = data[lastDate];
+    return queryString.stringify(prefs);
+  }
+
+  _formSubmit(e) {
+    e.preventDefault();
+    this.setState({ fireRedirect: true });
   }
 
   //
@@ -70,15 +96,7 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.state);
-    // let totalCoins = this.state.initialInvestment / this.state.bitcoinCost;
-    // totalCoins = _.round(totalCoins, 4);
-
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
-      'Sep', 'Nov', 'Dec'];
-    const years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
-    const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-      19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+    const { fireRedirect } = this.state;
 
     return (
       <div className="App font">
@@ -87,8 +105,8 @@ class App extends Component {
             type="tel"
             className="form-control value"
             id="amount"
-            onChange={this._selectedInvestment}
-            value={this.state.initialInvestment}
+            onChange={this._setInvestment}
+            value={this.state.investment}
             placeholder="Amount"
           /> in Bitcoin
         </div>
@@ -98,19 +116,19 @@ class App extends Component {
             <Select
               name="day"
               list={days}
-              change={this._selectedDate}
+              change={this._setDate}
               value={this.state.day}
             />
             <Select
               name="month"
               list={months}
-              change={this._selectedDate}
+              change={this._setDate}
               value={this.state.month}
             />
             <Select
               name="year"
               list={years}
-              change={this._selectedDate}
+              change={this._setDate}
               value={this.state.year}
             />
           </div>
@@ -120,16 +138,15 @@ class App extends Component {
         </div>
 
         <div>
-          <form onSubmit={() => history.push({
-            pathname: '/result',
-            query: { a: 'a' }
-          })}>
+          <form onSubmit={this._formSubmit}>
             <input
               type="submit"
               className="btn-lg btn-primary"
             />
           </form>
-
+          {fireRedirect && (
+          <Redirect to={`result?${this._generateQuery()}`} />
+          )}
         </div>
       </div>
     );

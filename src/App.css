@@ -84,3 +84,16 @@ button {
   font-size: 12pt !important;
   font-weight: 400;
 }
+
+// Result
+.result {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 32pt;
+  font-weight: 400;
+  color: #edc919 !important;
+}
+
+.highlight {
+  text-decoration: underline;
+  font-weight: 900;
+}
