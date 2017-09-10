@@ -8,7 +8,6 @@ import Select from '../Select';
 import '../App.css';
 import data from '../bitcoin.json';
 import { formatDate, days, months, years } from '../utilities';
-import { getTodaysRate } from '../utilities/api';
 
 
 class App extends Component {
@@ -24,20 +23,10 @@ class App extends Component {
     };
 
     this._setInvestment = this._setInvestment.bind(this);
-    // this._setDate = this._setDate.bind(this);
-    // this._updateBitcoinCost = this._updateBitcoinCost.bind(this);
     this._setDate = this._setDate.bind(this);
     this._generateQuery = this._generateQuery.bind(this);
 
     this._formSubmit = this._formSubmit.bind(this);
-  }
-
-  // Get current Bitcoin rate and store it in state
-  componentDidMount() {
-    getTodaysRate()
-    .then((response) => {
-      this.setState({ todaysRate: response.USD.rate_float });
-    });
   }
 
   // Do not re-render if todaysRate has been updated.
@@ -63,7 +52,7 @@ class App extends Component {
   }
 
   _generateQuery() {
-    const { day, month, year, investment, todaysRate } = this.state;
+    const { day, month, year, investment } = this.state;
     const date = formatDate(day, month, year);
     const coins = investment / data[date];
     const prefs = {};
@@ -81,19 +70,6 @@ class App extends Component {
     e.preventDefault();
     this.setState({ fireRedirect: true });
   }
-
-  //
-  // _setDate(date) {
-  //   const btc = this._updateBitcoinCost(date);
-  //   this.setState({ date, bitcoinCost: btc });
-  // }
-  //
-  // _updateBitcoinCost(date) {
-  //   // const date = this.state.date;
-  //   const buyDate = date.format('YYYY-MM-DD');
-  //   console.log(data[buyDate], data['2016-01-01'], buyDate, this.state);
-  //   return data[buyDate];
-  // }
 
   render() {
     const { fireRedirect } = this.state;
