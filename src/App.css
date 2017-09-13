@@ -91,6 +91,7 @@ button {
   font-size: 32pt;
   font-weight: 400;
   color: #edc919 !important;
+  text-align: center !important;
 }
 
 .highlight {

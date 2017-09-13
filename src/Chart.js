@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, Tooltip, YAxis, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, Tooltip, YAxis, XAxis, ResponsiveContainer } from 'recharts';
 import dataStore from './bitcoin.json';
 
 class Result extends React.Component {
@@ -21,10 +21,11 @@ class Result extends React.Component {
 
     return (
       <div className="chart">
-        <ResponsiveContainer width="80%" height={400} >
+        <ResponsiveContainer width="100%" height={400} >
           <LineChart data={data} margin={{ top: 5, right: 0, bottom: 5, left: 0 }}>
-            <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false} />
-            <YAxis dataKey="value" orientation="right" />
+            <Line type="monotone" dataKey="value" stroke="#edc919" dot={false} />
+            <YAxis dataKey="value" orientation="right" stroke="#b3b3b3" label="USD" tickCount="10" />
+            <XAxis dataKey="date" domain={['dataMin', 'dataMax']} stroke="#b3b3b3" />
             <Tooltip />
           </LineChart>
         </ResponsiveContainer>

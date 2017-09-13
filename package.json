@@ -1,14 +1,13 @@
 {
   "name": "bitcoin",
   "version": "0.1.0",
+  "homepage": "https://whyseverythingtaken.github.io/crypto/",
   "private": true,
   "dependencies": {
-    "history": "^4.7.2",
-    "moment": "^2.18.1",
+    "gh-pages": "^1.0.0",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
-    "react-datepicker": "^0.48.0",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2",
     "recharts": "^1.0.0-alpha.4"
@@ -21,6 +20,8 @@
     "styled-components": "^2.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

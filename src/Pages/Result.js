@@ -29,15 +29,17 @@ class Result extends React.Component {
     currentValue = Math.round(currentValue);
 
     return (
-      <div className="font" style={{ fontWeight: 400 }}>
-        <span className="highlight">${query.investment}</span>
-        {' investment on '}
-        <span className="highlight">{date}</span>
-        {' would be worth '}
-        <span className="highlight">${currentValue}</span>
-        {' today. That\'s an ROI of '}
-        <span className="highlight">{this.calculateROI(query.investment, currentValue)}%</span>
-        {'.'}
+      <div className="font col-md-offset-1 col-lg-offset-1 col-lg-10 col-md-10" style={{ fontWeight: 400, textAlign: 'center', lineHeight: 1.6 }}>
+        <div className="">
+          <span className="highlight">${query.investment}</span>
+          {' investment on '}
+          <span className="highlight">{date}</span>
+          {' would be worth '}
+          <span className="highlight">${currentValue}</span>
+          {' today. That\'s an ROI of '}
+          <span className="highlight">{this.calculateROI(query.investment, currentValue)}%</span>
+          {'.'}
+        </div>
         <Chart buyDate={query.date} coinsHeld={query.coins} />
       </div>
     );
