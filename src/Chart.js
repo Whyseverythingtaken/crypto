@@ -1,8 +1,14 @@
 import React from 'react';
 import { LineChart, Line, Tooltip, YAxis, XAxis, ResponsiveContainer } from 'recharts';
+import CustomTooltip from './ChartUtilities/CustomTooltip';
+
 import dataStore from './bitcoin.json';
 
 class Result extends React.Component {
+  constructor(props) {
+    super(props);
+    this._tickFormatter = this._tickFormatter.bind(this);
+  }
 
   render() {
     const { buyDate, coinsHeld } = this.props;
@@ -17,20 +23,21 @@ class Result extends React.Component {
         }
       }
     }
-    console.log(data, coinsHeld);
 
     return (
       <div className="chart">
-        <ResponsiveContainer width="100%" height={400} >
+        <ResponsiveContainer width="100%" height={370} >
           <LineChart data={data} margin={{ top: 5, right: 0, bottom: 5, left: 0 }}>
             <Line type="monotone" dataKey="value" stroke="#edc919" dot={false} />
-            <YAxis dataKey="value" orientation="right" stroke="#b3b3b3" label="USD" tickCount="10" />
-            <XAxis dataKey="date" domain={['dataMin', 'dataMax']} stroke="#b3b3b3" />
-            <Tooltip />
+            <Tooltip content={<CustomTooltip />} />
           </LineChart>
         </ResponsiveContainer>
       </div>
     );
+  }
+
+  _tickFormatter(value) {
+    return `$${value}`;
   }
 }
 

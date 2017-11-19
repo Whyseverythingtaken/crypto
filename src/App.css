@@ -31,6 +31,25 @@ body {
   margin-top: 170px;
 }
 
+@media (max-width: 768px) {
+  .App {
+    margin-top: 95px;
+    line-height: 1.9;
+  }
+
+  p {
+    font-size: 19pt;
+  }
+
+  .font {
+    font-size: 28pt;
+  }
+
+  select {
+    width:
+  }
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -54,13 +73,15 @@ body {
 
 .value {
   -webkit-appearance: none;
-  height: 50px;
-  width: 100px;
-  border-radius: 10px;
+  height: 45px;
+  width: 85px;
+  border-radius: 5px;
   box-sizing: border-box;
   padding: 0 5px 0 10px;
   border: none;
   font-size: 18px;
+  position: relative;
+  top: -6px;
 }
 
 .form-control {
@@ -69,6 +90,8 @@ body {
 
 select {
   width: auto !important;
+  position: relative;
+  top: -6px;
 }
 
 .wrapper {
@@ -95,6 +118,5 @@ button {
 }
 
 .highlight {
-  text-decoration: underline;
-  font-weight: 900;
+  color: #39b7e2;
 }

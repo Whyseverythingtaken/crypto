@@ -4,10 +4,12 @@
 import React, { Component } from 'react';
 import queryString from 'query-string';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
+
 import Select from '../Select';
 import '../App.css';
 import data from '../bitcoin.json';
-import { formatDate, days, months, years } from '../utilities';
+import { days, months, years } from '../utilities';
 
 
 class App extends Component {
@@ -16,8 +18,8 @@ class App extends Component {
     this.state = {
       investment: '',
       day: 10,
-      month: 'Jan',
-      year: 2011,
+      month: 'Dec',
+      year: 2016,
       todaysRate: 0,
       fireRedirect: false
     };
@@ -39,7 +41,6 @@ class App extends Component {
 
   // Store date in state
   _setDate(e) {
-    console.log(e.target.name);
     const period = e.target.name;
     const value = e.target.value;
     this.setState({
@@ -53,10 +54,11 @@ class App extends Component {
 
   _generateQuery() {
     const { day, month, year, investment } = this.state;
-    const date = formatDate(day, month, year);
-    const coins = investment / data[date];
+    const date = `${day}-${month}-${year}`;
+    const formattedDate = moment(date).format('YYYY-MM-DD');
+    const coins = investment / data[formattedDate];
     const prefs = {};
-    prefs.date = date;
+    prefs.date = formattedDate;
     prefs.coins = coins;
     prefs.investment = investment;
 
@@ -73,7 +75,6 @@ class App extends Component {
 
   render() {
     const { fireRedirect } = this.state;
-
     return (
       <div className="App font">
         <div id="one">
