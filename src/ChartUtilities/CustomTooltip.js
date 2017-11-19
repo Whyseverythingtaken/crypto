@@ -9,9 +9,8 @@ class CustomTooltip extends React.Component {
     };
     const { active, payload } = this.props;
     if (!payload) return null;
-    
+
     if (active) {
-      const { payload } = this.props;
       const date = payload[0].payload.date[0];
       return (
         <div style={style}>
