@@ -11,7 +11,7 @@ class Result extends React.Component {
 
   _profit(investment, currentValue) {
     const profit = currentValue - investment;
-    return numeral(profit).format('0');
+    return numeral(profit).format('$0,0');
   }
 
   render() {
@@ -39,11 +39,11 @@ class Result extends React.Component {
           <p>
             {'That\'s a profit of '}
             <span className="highlight">
-              ${this._profit(query.investment, currentValue)}
+              {this._profit(query.investment, currentValue)}
             </span>
           </p>
         </div>
-        <div>
+        <div style={{ lineHeight: 0 }}>
           <Link to="/" className="btn btn-primary">Try again</Link>
         </div>
         <Chart buyDate={query.date} coinsHeld={query.coins} />

@@ -18,8 +18,8 @@ class App extends Component {
     this.state = {
       investment: '',
       day: 10,
-      month: 'Dec',
-      year: 2016,
+      month: 'Jan',
+      year: 2011,
       todaysRate: 0,
       fireRedirect: false
     };
