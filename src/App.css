@@ -7,6 +7,11 @@ body {
   line-height: 2.0;
 }
 
+p {
+  margin: 0;
+  font-size: 1em;
+}
+
 .one {
 
 }
@@ -119,4 +124,5 @@ button {
 
 .highlight {
   color: #39b7e2;
+  white-space: nowrap;
 }

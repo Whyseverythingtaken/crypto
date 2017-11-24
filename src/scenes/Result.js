@@ -17,36 +17,31 @@ class Result extends React.Component {
   render() {
     const { location } = this.props;
     const query = queryString.parse(location.search);
-    const date = moment(query.date, 'YYYY-MM-DD')
+    const { date, coins, rate, investment } = query;
+    const formattedDate = moment(date, 'YYYY-MM-DD')
       .format('MMM DD YYYY');
-    const currentValue = Number(query.coins) * Number(query.rate);
+    const currentValue = Number(coins) * Number(rate);
 
-    const _investValue = numeral(query.investment).format('$0,0');
+    const _investValue = numeral(investment).format('$0,0');
     const _currentValue = numeral(currentValue).format('$0,0');
     return (
       <div className="font col-md-offset-1 col-lg-offset-1 col-lg-10 col-md-10" style={{ fontWeight: 400, textAlign: 'center', lineHeight: 1.6 }}>
-        <div className="">
+        <div style={{ marginTop: 10 }}>
           <p>
             <span className="highlight">{_investValue}</span>
             {' investment on '}
-            <span className="highlight">{date}</span>
+            <span className="highlight">{formattedDate}</span>
           </p>
           <p>
             {' would be worth '}
             <span className="highlight">{_currentValue}</span>
-            {' today.'}
-          </p>
-          <p>
-            {'That\'s a profit of '}
-            <span className="highlight">
-              {this._profit(query.investment, currentValue)}
-            </span>
+            {' today'}
           </p>
         </div>
-        <div style={{ lineHeight: 0 }}>
+        <div style={{ lineHeight: 0, marginTop: 10 }}>
           <Link to="/" className="btn btn-primary">Try again</Link>
         </div>
-        <Chart buyDate={query.date} coinsHeld={query.coins} />
+        <Chart buyDate={date} coinsHeld={coins} />
       </div>
     );
   }
