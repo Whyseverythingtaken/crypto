@@ -9,9 +9,10 @@ import Chart from '../Chart';
 
 class Result extends React.Component {
 
-  _profit(investment, currentValue) {
+  _getRoi(investment, currentValue) {
     const profit = currentValue - investment;
-    return numeral(profit).format('$0,0');
+    const ROI = (profit / investment) * 100;
+    return `${numeral(ROI).format('0')}%`;
   }
 
   render() {
@@ -35,7 +36,13 @@ class Result extends React.Component {
           <p>
             {' would be worth '}
             <span className="highlight">{_currentValue}</span>
-            {' today'}
+            {' today.'}
+          </p>
+          <p>
+            {'That\'s an ROI of '}
+            <span className="highlight">
+              {this._getRoi(investment, currentValue)}.
+            </span>
           </p>
         </div>
         <div style={{ lineHeight: 0, marginTop: 10 }}>
