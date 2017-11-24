@@ -4,8 +4,8 @@
 
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './Pages/Home';
-import Result from './Pages/Result';
+import Home from './scenes/Home';
+import Result from './scenes/Result';
 
 
 class App extends Component {

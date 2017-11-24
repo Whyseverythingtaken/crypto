@@ -9,17 +9,16 @@ import Chart from '../Chart';
 
 class Result extends React.Component {
 
-  calculateROI(investment, currentValue) {
+  _profit(investment, currentValue) {
     const profit = currentValue - investment;
-    const ROI = (profit / investment) * 100;
-    return numeral(ROI).format('0');
+    return numeral(profit).format('0');
   }
 
   render() {
     const { location } = this.props;
     const query = queryString.parse(location.search);
-
-    const date = moment(query.date).format('MMM DD YYYY');
+    const date = moment(query.date, 'YYYY-MM-DD')
+      .format('MMM DD YYYY');
     const currentValue = Number(query.coins) * Number(query.rate);
 
     const _investValue = numeral(query.investment).format('$0,0');
@@ -38,9 +37,9 @@ class Result extends React.Component {
             {' today.'}
           </p>
           <p>
-            {'That\'s an ROI of '}
+            {'That\'s a profit of '}
             <span className="highlight">
-              {this.calculateROI(query.investment, currentValue)}%
+              ${this._profit(query.investment, currentValue)}
             </span>
           </p>
         </div>

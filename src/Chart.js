@@ -1,15 +1,11 @@
 import React from 'react';
-import { LineChart, Line, Tooltip, YAxis, XAxis, ResponsiveContainer } from 'recharts';
+import numeral from 'numeral';
+import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 import CustomTooltip from './ChartUtilities/CustomTooltip';
 
 import dataStore from './bitcoin.json';
 
 class Result extends React.Component {
-  constructor(props) {
-    super(props);
-    this._tickFormatter = this._tickFormatter.bind(this);
-  }
-
   render() {
     const { buyDate, coinsHeld } = this.props;
     const data = [];
@@ -18,8 +14,10 @@ class Result extends React.Component {
         const d1 = Date.parse(buyDate);
         const d2 = Date.parse(date);
         if (d2 > d1) {
-          const price = Math.round(dataStore[date] * coinsHeld);
-          data.push({ date: [date], value: price });
+          const price = numeral(dataStore[date] * coinsHeld).format('0.00');
+          // convert string to int
+          const value = numeral(price).value();
+          data.push({ date: [date], value });
         }
       }
     }
@@ -34,10 +32,6 @@ class Result extends React.Component {
         </ResponsiveContainer>
       </div>
     );
-  }
-
-  _tickFormatter(value) {
-    return `$${value}`;
   }
 }
 

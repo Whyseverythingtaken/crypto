@@ -55,7 +55,7 @@ class App extends Component {
   _generateQuery() {
     const { day, month, year, investment } = this.state;
     const date = `${day}-${month}-${year}`;
-    const formattedDate = moment(date).format('YYYY-MM-DD');
+    const formattedDate = moment(date, 'DD-MMM-YYYY').format('YYYY-MM-DD');
     const coins = investment / data[formattedDate];
     const prefs = {};
     prefs.date = formattedDate;
