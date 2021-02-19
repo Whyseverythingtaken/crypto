@@ -4,16 +4,12 @@ html {
 
 body {
   background-color: rgb(36, 15, 31);
-  line-height: 2.0;
+  line-height: 2;
 }
 
 p {
   margin: 0;
   font-size: 1em;
-}
-
-.one {
-
 }
 
 .two {
@@ -25,7 +21,7 @@ p {
 }
 
 .font {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 32pt;
   font-weight: 900;
   color: #edc919;
@@ -51,7 +47,7 @@ p {
   }
 
   select {
-    width:
+    width: ;
   }
 }
 
@@ -72,8 +68,12 @@ p {
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .value {
@@ -115,7 +115,7 @@ button {
 
 // Result
 .result {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 32pt;
   font-weight: 400;
   color: #edc919 !important;
