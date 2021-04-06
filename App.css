@@ -12,6 +12,19 @@ p {
   font-size: 1em;
 }
 
+select {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
 .two {
   color: #39b7e2;
 }
@@ -104,10 +117,6 @@ select {
   margin-left: 5px;
 }
 
-button {
-  background-color: #089dbf !important;
-}
-
 .chart {
   font-size: 12pt !important;
   font-weight: 400;
@@ -125,4 +134,15 @@ button {
 .highlight {
   color: #39b7e2;
   white-space: nowrap;
+}
+
+.btn-primary {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  cursor: pointer;
 }

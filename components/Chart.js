@@ -1,9 +1,9 @@
-import React from 'react';
-import numeral from 'numeral';
-import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
-import CustomTooltip from './ChartUtilities/CustomTooltip';
+import React from "react";
+import numeral from "numeral";
+import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
+import CustomTooltip from "./CustomTooltip";
 
-import dataStore from './bitcoin.json';
+import dataStore from "../bitcoin.json";
 
 class Result extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class Result extends React.Component {
         const d1 = Date.parse(buyDate);
         const d2 = Date.parse(date);
         if (d2 > d1) {
-          const price = numeral(dataStore[date] * coinsHeld).format('0.00');
+          const price = numeral(dataStore[date] * coinsHeld).format("0.00");
           // convert string to int
           const value = numeral(price).value();
           data.push({ date: [date], value });
@@ -24,14 +24,18 @@ class Result extends React.Component {
 
     return (
       <div className="chart">
-        <ResponsiveContainer width="100%" height={350} >
-          <LineChart data={data} margin={{ top: 5, right: 0, bottom: 5, left: 0 }}>
+        <ResponsiveContainer width="100%" height={350}>
+          <LineChart
+            data={data}
+            margin={{ top: 5, right: 0, bottom: 5, left: 0 }}
+          >
             <Line
               type="monotone"
               dataKey="value"
               stroke="#edc919"
               dot={false}
-              animationDuration={2000} />
+              animationDuration={2000}
+            />
             <Tooltip content={<CustomTooltip />} />
           </LineChart>
         </ResponsiveContainer>
